@@ -13,4 +13,6 @@ app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
 
+import 'virtual:windi.css'
+
 app.mount('#app')
