@@ -1,7 +1,60 @@
-<script setup></script>
+<script setup>
+const form = reactive({
+	username: 'admin',
+	password: '123456'
+})
+const onSubmit = () => {
+	console.log('submit!')
+}
+</script>
 
 <template>
-	<div>登录页</div>
+	<el-row class="w-full h-screen bg">
+		<el-col :span="12" class="flex flex-col justify-center items-center text-light-50">
+			<p class="text-5xl font-bold mb-4">Admin Web</p>
+			<p class="text-3xl">基于 Vue 3 和 Vite 的后台管理系统</p>
+		</el-col>
+
+		<el-col :span="12" class="flex flex-col justify-center items-center">
+			<h2 class="text-gray-600 text-3xl font-bold">后台登录</h2>
+			<div class="flex justify-center items-center my-5 space-x-2">
+				<span class="h-[1px] w-24 bg-gray-200"></span>
+				<span class="text-gray-400">账号密码登录</span>
+				<span class="h-[1px] w-24 bg-gray-200"></span>
+			</div>
+
+			<el-form :model="form" class="w-[50%]">
+				<el-form-item>
+					<el-input placeholder="Username" v-model="form.username">
+						<template #prefix>
+							<IEpUser class="text-gray-400"></IEpUser>
+						</template>
+					</el-input>
+				</el-form-item>
+
+				<el-form-item>
+					<el-input type="password" placeholder="Password" v-model="form.password">
+						<template #prefix>
+							<IEpLock class="text-gray-400"></IEpLock>
+						</template>
+					</el-input>
+				</el-form-item>
+
+				<el-form-item>
+					<el-button
+						class="w-full py-5 bg-gradient-to-r from-blue-300 to-indigo-400 text-white rounded-full text-lg"
+						@click="onSubmit"
+						>登 录</el-button
+					>
+				</el-form-item>
+			</el-form>
+		</el-col>
+	</el-row>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg {
+	background-image: url('/login_bg.png');
+	background-size: cover;
+}
+</style>
