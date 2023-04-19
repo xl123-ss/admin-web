@@ -1,6 +1,5 @@
 <script setup>
 import { login } from '@/api/auth'
-import { useCookies } from '@vueuse/integrations/useCookies'
 const router = useRouter()
 
 const form = reactive({
@@ -34,20 +33,11 @@ const onSubmit = () => {
 		login(form.username, form.password).then(res => {
 			console.log(res)
 			if (res.code == 1) {
-				ElNotification({
-					message: '登录成功',
-					type: 'success',
-					duration: 1000
-				})
-				const cookie = useCookies()
-				cookie.set('accessToken', res.data.accessToken)
+				toast('登录成功')
+				setToken(res.data.accessToken)
 				router.push('/')
 			} else {
-				ElNotification({
-					message: res.msg,
-					type: 'error',
-					duration: 1000
-				})
+				toast(res.msg, 'error')
 			}
 		})
 	})

@@ -1,15 +1,15 @@
 <script setup>
 import { logout } from '@/api/auth'
-import { useCookies } from '@vueuse/integrations/useCookies'
 
-const cookie = useCookies()
 const router = useRouter()
 
 const handleLogout = () => {
-	logout().then(res => {
-		console.log(res)
-		cookie.remove('accessToken')
-		router.push('/login')
+	showModal('确定退出吗?').then(() => {
+		logout().then(res => {
+			console.log(res)
+			removeToken()
+			router.push('/login')
+		})
 	})
 }
 </script>

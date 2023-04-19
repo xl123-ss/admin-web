@@ -25,9 +25,8 @@ export default defineConfig({
 				{
 					// onBeforeRouteLeave 'vue-router’的这个 API 未被自动导入，在这里补充
 					'vue-router': ['onBeforeRouteLeave'],
-					api: [['default', 'api']],
-					hooks: [['default', 'hooks']],
-					store: [['default', 'store']]
+					'@/composables/util': ['toast', 'showModal', 'showFullLoading', 'hideFullLoading'],
+					'@/composables/token': ['setToken', 'getToken', 'removeToken']
 				}
 			],
 			// 生成 auto-import.d.ts 声明文件
