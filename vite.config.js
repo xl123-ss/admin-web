@@ -21,12 +21,18 @@ export default defineConfig({
 				'vue',
 				'vue-router',
 				'@vueuse/core',
+				'pinia',
 				//自定义导入
 				{
 					// onBeforeRouteLeave 'vue-router’的这个 API 未被自动导入，在这里补充
 					'vue-router': ['onBeforeRouteLeave'],
 					'@/composables/util': ['toast', 'showModal', 'showFullLoading', 'hideFullLoading'],
-					'@/composables/token': ['setToken', 'getToken', 'removeToken']
+					'@/composables/token': ['setToken', 'getToken', 'removeToken'],
+					'@/composables/useAdmin': ['useLogin', 'useLogout', 'usePassword'],
+					'@/api/auth': ['login', 'logout'],
+					'@/api/admin': ['getInfo', 'rePassword'],
+					'@vueuse/integrations/useCookies': ['useCookies'],
+					'@/store': ['useAdminStore']
 				}
 			],
 			// 生成 auto-import.d.ts 声明文件
