@@ -33,10 +33,23 @@ const onSubmit = () => {
 			return false
 		}
 		login(form.username, form.password).then(res => {
-			console.log(res.data.data)
-			const cookie = useCookies()
-			cookie.set('accessToken', res.data.data.accessToken)
-			router.push('/')
+			console.log(res)
+			if (res.code == 1) {
+				ElNotification({
+					message: '登录成功',
+					type: 'success',
+					duration: 1000
+				})
+				const cookie = useCookies()
+				cookie.set('accessToken', res.data.accessToken)
+				router.push('/')
+			} else {
+				ElNotification({
+					message: res.msg,
+					type: 'error',
+					duration: 1000
+				})
+			}
 		})
 	})
 }
