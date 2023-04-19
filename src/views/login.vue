@@ -1,4 +1,8 @@
 <script setup>
+import { login } from '@/api/auth'
+import { useCookies } from '@vueuse/integrations/useCookies'
+const router = useRouter()
+
 const form = reactive({
 	username: 'admin',
 	password: '123456'
@@ -28,7 +32,12 @@ const onSubmit = () => {
 		if (!valid) {
 			return false
 		}
-		console.log('验证通过')
+		login(form.username, form.password).then(res => {
+			console.log(res.data.data)
+			const cookie = useCookies()
+			cookie.set('accessToken', res.data.data.accessToken)
+			router.push('/')
+		})
 	})
 }
 </script>
