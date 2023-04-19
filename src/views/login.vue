@@ -3,8 +3,33 @@ const form = reactive({
 	username: 'admin',
 	password: '123456'
 })
+const rules = {
+	username: [
+		{
+			required: true,
+			message: '用户名不能为空',
+			trigger: 'blur'
+		}
+	],
+	password: [
+		{
+			required: true,
+			message: '密码不能为空',
+			trigger: 'blur'
+		}
+	]
+}
+
+const formRef = ref(null)
+
 const onSubmit = () => {
 	console.log('submit!')
+	formRef.value.validate(valid => {
+		if (!valid) {
+			return false
+		}
+		console.log('验证通过')
+	})
 }
 </script>
 
@@ -23,8 +48,8 @@ const onSubmit = () => {
 				<span class="h-[1px] w-24 bg-gray-200"></span>
 			</div>
 
-			<el-form :model="form" class="w-[50%]">
-				<el-form-item>
+			<el-form :model="form" class="w-[50%]" ref="formRef" :rules="rules">
+				<el-form-item prop="username">
 					<el-input placeholder="Username" v-model="form.username">
 						<template #prefix>
 							<IEpUser class="text-gray-400"></IEpUser>
@@ -32,7 +57,7 @@ const onSubmit = () => {
 					</el-input>
 				</el-form-item>
 
-				<el-form-item>
+				<el-form-item prop="password">
 					<el-input type="password" placeholder="Password" v-model="form.password">
 						<template #prefix>
 							<IEpLock class="text-gray-400"></IEpLock>
