@@ -9,5 +9,10 @@
 		<el-button>中文</el-button>
 	</el-row>
 
-	<div class="f-center p-10 mt-10 shadow-xl shadow-gray-400" bg="sky-400">测试 WindiCSS</div>
+	<div class="f-center p-10 mt-10 shadow-xl shadow-gray-400" bg="sky-400">
+		<el-icon size="32">
+			<user />
+		</el-icon>
+		测试 WindiCSS
+	</div>
 </template>
