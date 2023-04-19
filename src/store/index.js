@@ -2,7 +2,56 @@ export const useAdminStore = defineStore('admin', {
 	state: () => ({
 		//管理员信息
 		adminInfo: {},
-		sideWidth: '220px'
+		sideWidth: '220px',
+		menus: [
+			{
+				name: '仪表盘',
+				icon: 'DataBoard',
+				frontpath: '/'
+			},
+			{
+				name: '系统设置',
+				icon: 'Setting',
+				frontpath: '/setting',
+				child: [
+					{
+						name: '菜单管理',
+						icon: 'Memo',
+						frontpath: '/menu'
+					},
+					{
+						name: '角色管理',
+						icon: 'Edit',
+						frontpath: '/role'
+					}
+				]
+			},
+			{
+				name: '接口文档',
+				icon: 'Document',
+				frontpath: '/docs'
+			},
+			{
+				name: '用户管理',
+				icon: 'User',
+				frontpath: '/user'
+			},
+			{
+				name: '通知管理',
+				icon: 'Bell',
+				frontpath: '/notice'
+			},
+			{
+				name: '商品管理',
+				icon: 'Goods',
+				frontpath: '/goods'
+			},
+			{
+				name: '订单管理',
+				icon: 'ShoppingCart',
+				frontpath: '/order'
+			}
+		]
 	}),
 	actions: {
 		// 登录

@@ -1,7 +1,6 @@
 <script setup>
-import TopNav from './components/TopNav.vue'
-import SideMenu from './components/SideMenu.vue'
-import BreadCrumbs from './components/BreadCrumbs.vue'
+const store = useAdminStore()
+const { sideWidth } = storeToRefs(store)
 </script>
 
 <template>
@@ -11,7 +10,7 @@ import BreadCrumbs from './components/BreadCrumbs.vue'
 		</el-header>
 
 		<el-container>
-			<el-aside>
+			<el-aside :style="{ width: sideWidth }">
 				<side-menu />
 			</el-aside>
 
@@ -26,5 +25,9 @@ import BreadCrumbs from './components/BreadCrumbs.vue'
 <style scoped>
 .el-main {
 	@apply w-full h-screen text-left;
+	padding: 0;
+}
+.el-aside {
+	transition: all 0.2s;
 }
 </style>
