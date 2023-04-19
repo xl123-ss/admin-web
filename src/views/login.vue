@@ -1,5 +1,7 @@
 <script setup>
 import { login } from '@/api/auth'
+// import { getInfo } from '@/api/admin'
+
 const router = useRouter()
 
 const form = reactive({
@@ -36,6 +38,10 @@ const onSubmit = () => {
 				toast('登录成功')
 				setToken(res.data.accessToken)
 				router.push('/')
+				// getInfo(res => {
+				// 	console.log(res)
+				// 	router.push('/')
+				// })
 			} else {
 				toast(res.msg, 'error')
 			}
