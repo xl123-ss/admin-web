@@ -27,7 +27,6 @@ const rules = {
 const formRef = ref(null)
 
 const onSubmit = () => {
-	console.log('submit!')
 	formRef.value.validate(valid => {
 		if (!valid) {
 			return false
