@@ -1,52 +1,5 @@
 <script setup>
-const loginFormRef = ref()
-
-const loginForm = reactive({
-	mobile: '13951905171',
-	code: ''
-})
-
-const loginRules = ref({
-	mobile: [
-		{
-			required: true,
-			message: '手机号不能为空',
-			trigger: 'blur'
-		}
-	]
-})
-
-// 发送短信验证码
-const sendCode = () => {
-	loginFormRef.value.validate(valid => {
-		if (!valid) {
-			return false
-		}
-		timerHandler()
-	})
-}
-
-// 短信计时器
-const sms = reactive({
-	disabled: false,
-	total: 60,
-	count: 0
-})
-
-// 计时器处理器
-const timerHandler = () => {
-	sms.count = sms.total
-	sms.disabled = true
-
-	let timer = setInterval(() => {
-		if (sms.count > 1 && sms.count <= sms.total) {
-			sms.count--
-		} else {
-			sms.disabled = false
-			clearInterval(timer)
-		}
-	}, 1000)
-}
+const { loginFormRef, loginForm, loginRules, sendCode, sms } = useMobileLogin()
 </script>
 
 <template>

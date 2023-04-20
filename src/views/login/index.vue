@@ -23,7 +23,7 @@ const loginSwitch = type => {
 
 		<el-col :lg="12" :md="12" class="right">
 			<h2 class="title">{{ title }}</h2>
-			
+
 			<div class="f-center py-6">
 				<span class="line"></span>
 				<button class="text-gray-400 mx-2" @click="loginSwitch('account')" :class="{ active: selected == 1 }">

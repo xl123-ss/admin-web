@@ -1,5 +1,5 @@
 <script setup>
-const { form, formRef, rules, loading, onSubmit, onCaptcha, captchaBase64 } = useLogin()
+const { form, formRef, rules, loading, onSubmit, onCaptcha, captchaBase64 } = useAccountLogin()
 
 // 监听回车事件
 function onKeyUp(e) {
