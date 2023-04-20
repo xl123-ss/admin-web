@@ -1,30 +1,27 @@
-<template>
-	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" @keyup.enter="onLogin" class="w-[80%]">
-		<el-form-item prop="mobile" class="py-3">
-			<el-input v-model="loginForm.mobile" :prefix-icon="User" placeholder="请输入手机号"></el-input>
-		</el-form-item>
-
-		<el-form-item prop="code" class="flex py-3">
-			<el-input v-model="loginForm.code" placeholder="请输入验证码" :prefix-icon="Key" class="flex-1"></el-input>
-			<el-button v-if="!sms.disabled" type="default" @click="sendCode" class="px-2 ml-2">发送验证码</el-button>
-			<el-button v-else type="default" disabled class="px-2 ml-2">{{ sms.count }} 秒后重新发送</el-button>
-		</el-form-item>
-
-		<el-form-item>
-			<el-button class="login-btn" @click="onLogin()">登 录</el-button>
-		</el-form-item>
-	</el-form>
-</template>
-
 <script setup>
+const loginFormRef = ref()
+
+const loginForm = reactive({
+	mobile: '13951905171',
+	code: ''
+})
+
+const loginRules = ref({
+	mobile: [
+		{
+			required: true,
+			message: '手机号不能为空',
+			trigger: 'blur'
+		}
+	]
+})
+
 // 发送短信验证码
 const sendCode = () => {
-	if (!validateMobile(loginForm.mobile)) {
-		showToast('请输入正确的手机号', 'error')
-		return
-	}
-
-	useSendCodeApi(loginForm.mobile).then(() => {
+	loginFormRef.value.validate(valid => {
+		if (!valid) {
+			return false
+		}
 		timerHandler()
 	})
 }
@@ -50,33 +47,25 @@ const timerHandler = () => {
 		}
 	}, 1000)
 }
-
-const router = useRouter()
-const loginFormRef = ref()
-
-const loginForm = reactive({
-	mobile: '',
-	code: ''
-})
-
-const loginRules = ref({
-	mobile: [{ required: true, message: 'required', trigger: 'blur' }],
-	code: [{ required: true, message: 'required', trigger: 'blur' }]
-})
-
-const onLogin = () => {
-	loginFormRef.value.validate(valid => {
-		if (!valid) {
-			return false
-		}
-
-		// 用户登录
-		login(loginForm).then(() => {
-			router.push('/')
-		})
-	})
-}
 </script>
+
+<template>
+	<el-form class="w-[80%]" ref="loginFormRef" :model="loginForm" :rules="loginRules">
+		<el-form-item class="py-3" prop="mobile">
+			<el-input prefix-icon="User" placeholder="请输入手机号" v-model="loginForm.mobile"></el-input>
+		</el-form-item>
+
+		<el-form-item class="flex py-3">
+			<el-input placeholder="请输入验证码" prefix-icon="Key" class="flex-1" v-model="loginForm.code"></el-input>
+			<el-button v-if="!sms.disabled" type="default" @click="sendCode" class="px-2 ml-2">发送验证码</el-button>
+			<el-button v-else type="default" disabled class="px-2 ml-2">{{ sms.count }} 秒后重新发送</el-button>
+		</el-form-item>
+
+		<el-form-item>
+			<el-button class="login-btn">登 录</el-button>
+		</el-form-item>
+	</el-form>
+</template>
 
 <style scoped>
 .login-btn {
