@@ -42,6 +42,7 @@ declare module '@vue/runtime-core' {
     IEpExpand: typeof import('~icons/ep/expand')['default']
     IEpFold: typeof import('~icons/ep/fold')['default']
     IEpFullScreen: typeof import('~icons/ep/full-screen')['default']
+    IEpKey: typeof import('~icons/ep/key')['default']
     IEpLock: typeof import('~icons/ep/lock')['default']
     IEpPrinter: typeof import('~icons/ep/printer')['default']
     IEpRefresh: typeof import('~icons/ep/refresh')['default']

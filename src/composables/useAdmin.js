@@ -6,7 +6,9 @@ export function useLogin() {
 
 	const form = reactive({
 		username: 'admin',
-		password: '123456'
+		password: '123456',
+		key: '',
+		captcha: ''
 	})
 
 	const rules = {
@@ -23,7 +25,28 @@ export function useLogin() {
 				message: '密码不能为空',
 				trigger: 'blur'
 			}
+		],
+		captcha: [
+			{
+				required: true,
+				message: '验证码不能为空',
+				trigger: 'blur'
+			}
 		]
+	}
+
+	const captchaBase64 = ref('')
+
+	onMounted(() => {
+		onCaptcha()
+	})
+
+	const onCaptcha = () => {
+		getCaptcha().then(res => {
+			console.log(res.data)
+			form.key = res.data.key
+			captchaBase64.value = res.data.image
+		})
 	}
 
 	const formRef = ref(null)
@@ -38,7 +61,7 @@ export function useLogin() {
 			loading.value = true
 
 			setTimeout(() => {
-				login(form.username, form.password).then(res => {
+				login(form).then(res => {
 					if (res.code === 1) {
 						toast('登录成功')
 						router.push('/')
@@ -53,7 +76,9 @@ export function useLogin() {
 		formRef,
 		rules,
 		loading,
-		onSubmit
+		captchaBase64,
+		onSubmit,
+		onCaptcha
 	}
 }
 

@@ -29,7 +29,7 @@ export default defineConfig({
 					'@/composables/util': ['toast', 'showModal', 'showFullLoading', 'hideFullLoading'],
 					'@/composables/token': ['setToken', 'getToken', 'removeToken'],
 					'@/composables/useAdmin': ['useLogin', 'useLogout', 'usePassword'],
-					'@/api/auth': ['login', 'logout'],
+					'@/api/auth': ['login', 'logout', 'getCaptcha'],
 					'@/api/admin': ['getInfo', 'rePassword'],
 					'@vueuse/integrations/useCookies': ['useCookies'],
 					'@/store': ['useAdminStore']
